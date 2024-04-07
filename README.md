@@ -80,7 +80,7 @@ return [
 ];
 ```
 
-#### Recomendations
+#### Security recommendations
 Set the key directly in the file, like: 
 
 ```php
