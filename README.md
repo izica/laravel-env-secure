@@ -25,7 +25,7 @@ php artisan vendor:publish --provider="Izica\\EnvSecure\\EnvSecureServiceProvide
 
 ## Usage
 
-### 1. Encrypt env value
+#### 1. Encrypt env value
 ```php
 php artisan env:secure {env key} {--cli} {--decrypt}
 ```
@@ -49,7 +49,7 @@ to:
 DB_PASSWORD=scr::zvzEOZDAE4k/7D/rx
 ```
 
-### 2. Change config to
+#### 2. Change config to
 
 ```php
 //config/database.php
