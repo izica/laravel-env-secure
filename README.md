@@ -14,11 +14,47 @@ You can install the package via composer:
 composer require izica/laravel-env-secure
 ```
 
+## Publish config(optional)
+
+```bash
+php artisan vendor:publish --provider="Izica\\EnvSecure\\EnvSecureServiceProvider"
+
+```
+
 ## Usage
 
+### 1. Encrypt env value
 ```php
-// Usage description here
+php artisan env:secure {env key} {--cli} {--decrypt}
 ```
+Options:
+* --cli - only print result in console don't rewrite .env
+* --decrypt - decript env value
+
+Example:
+```php
+php artisan env:secure DB_PASSWORD
+```
+
+### 2. Change config to
+
+```php
+//config/database.php
+
+use \Izica\EnvSecure\EnvSecure;
+
+[
+    //...
+    'connections' => [
+         //...
+        'mysql' => [
+            //...
+            'password' => EnvSecure::env('DB_PASSWORD', ''),
+        ]
+    ]
+]
+```
+
 
 ### Testing
 
