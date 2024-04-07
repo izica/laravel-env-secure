@@ -1,6 +1,6 @@
 <?php
 
-namespace Izica\LaravelEnvSecure;
+namespace Izica\EnvSecure;
 
 use Illuminate\Support\Facades\Facade;
 

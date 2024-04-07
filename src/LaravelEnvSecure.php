@@ -1,11 +1,9 @@
 <?php
+namespace Izica\EnvSecure;
 
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Cache;
-
-namespace Izica\LaravelEnvSecure;
-
 
 class LaravelEnvSecure
 {

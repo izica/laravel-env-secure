@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Izica\EnvSecure\Commands;
 
 use Dotenv\Dotenv;
 use Illuminate\Console\Command;

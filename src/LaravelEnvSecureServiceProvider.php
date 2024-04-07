@@ -1,7 +1,8 @@
 <?php
 
-namespace Izica\LaravelEnvSecure;
+namespace Izica\EnvSecure;
 
+use App\Console\Commands\EnvSecure;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelEnvSecureServiceProvider extends ServiceProvider
@@ -19,6 +20,9 @@ class LaravelEnvSecureServiceProvider extends ServiceProvider
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
+        $this->commands([
+            EnvSecure::class
+        ])
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/env-secure.php' => config_path('env-secure.php'),
