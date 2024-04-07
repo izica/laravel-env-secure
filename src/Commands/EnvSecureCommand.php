@@ -27,27 +27,26 @@ class EnvSecureCommand extends Command
         $decrypt = $this->option('decrypt');
         $cli = $this->option('cli');
 
-        $dotenv = Dotenv::createArrayBacked(base_path('.'));
-        $data = $dotenv->load();
+        $value1 = env($key, null);
 
-        if (!isset($data[$key])) {
+        if (!isset($value1)) {
             throw new \Exception("$key value not found.");
         }
 
-        if (!is_string($data[$key])) {
+        if (!is_string($value1)) {
             throw new \Exception("$key is not a string.");
             return;
         }
 
-        $value = $decrypt
-            ? EnvSecure::decrypt($data[$key])
-            : EnvSecure::encrypt($data[$key]);
+        $value2 = $decrypt
+            ? EnvSecure::decrypt($value1)
+            : EnvSecure::encrypt($value1);
 
         if ($cli) {
-            print_r($value);
+            print_r($value2);
             print_r("\n");
         } else {
-            $this->writeToEnv($key, $data[$key], $value);
+            $this->writeToEnv($key, $value1, $value2);
         }
     }
 }
