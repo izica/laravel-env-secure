@@ -38,7 +38,7 @@
                 "Izica\\EnvSecure\\EnvSecureServiceProvider"
             ],
             "aliases": {
-                "LaravelEnvSecure": "Izica\\EnvSecure\\EnvSecureFacade"
+                "EnvSecure": "Izica\\EnvSecure\\EnvSecureFacade"
             }
         }
     }
