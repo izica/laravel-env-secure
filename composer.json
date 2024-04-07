@@ -1,0 +1,54 @@
+{
+    "name": "izica/laravel-env-secure",
+    "description": "Secure Laravel .env variables",
+    "keywords": [
+        "izica",
+        "laravel-env-secure"
+    ],
+    "homepage": "https://github.com/izica/laravel-env-secure",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "izica",
+            "email": "artemiztomska@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/support": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Izica\\LaravelEnvSecure\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Izica\\LaravelEnvSecure\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Izica\\LaravelEnvSecure\\LaravelEnvSecureServiceProvider"
+            ],
+            "aliases": {
+                "LaravelEnvSecure": "Izica\\LaravelEnvSecure\\LaravelEnvSecureFacade"
+            }
+        }
+    }
+}
