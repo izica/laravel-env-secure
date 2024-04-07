@@ -4,14 +4,13 @@ namespace Izica\EnvSecure\Commands;
 
 use Dotenv\Dotenv;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Str;
+use Izica\EnvSecure\EnvSecure;
 
 class EnvSecureCommand extends Command
 {
     protected $signature = 'env:secure {key} {--decrypt} {--cli}';
 
-    private function replace($key, $value1, $value2)
+    private function writeToEnv($key, $value1, $value2)
     {
         $path = base_path('.env');
 
@@ -34,36 +33,21 @@ class EnvSecureCommand extends Command
         if (!isset($data[$key])) {
             throw new \Exception("$key value not found.");
         }
-        $value = $data[$key];
 
-        if (!is_string($value)) {
+        if (!is_string($data[$key])) {
             throw new \Exception("$key is not a string.");
             return;
         }
 
-        $prefix = config("env-secure.prefix", "");
-
-        if ($decrypt) {
-            if (!Str::of($value)->startsWith($prefix)) {
-                throw new \Exception("$key is not secured or prefix invalid.");
-                return;
-            }
-            $newValue = Crypt::decryptString(Str::of($value)->replace($prefix, '')->toString());
-
-        } else {
-            if (Str::of($value)->startsWith($prefix)) {
-                throw new \Exception("$key already secured.");
-                return;
-            }
-            $newValue = $prefix . Crypt::encryptString($value);
-        }
+        $value = $decrypt
+            ? EnvSecure::decrypt($data[$key])
+            : EnvSecure::encrypt($data[$key]);
 
         if ($cli) {
-            print_r("\n");
-            print_r($newValue);
+            print_r($value);
             print_r("\n");
         } else {
-            $this->replace($key, $value, $newValue);
+            $this->writeToEnv($key, $data[$key], $value);
         }
     }
 }

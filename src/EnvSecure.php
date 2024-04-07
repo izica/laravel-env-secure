@@ -1,31 +1,53 @@
 <?php
-namespace Izica\EnvSecure;
 
-use Illuminate\Contracts\Encryption\DecryptException;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Cache;
+namespace Izica\EnvSecure;
 
 class EnvSecure
 {
     public static function env($key, $default = null)
     {
-        return Cache::remember("laravel-env-secure:$key", 3600000, function () use ($key, $default) {
-            $value = env($key, $default);
-            if (!is_string($value)) {
-                return $value;
-            }
-            $value = Str::of($value);
-            $prefix = config("env-secure.prefix");
-            if (!$value->startsWith($key, $prefix)) {
-                return $value;
-            }
-            $value = $value->replace($prefix, '');
+        return self::decrypt(env($key, $default));
+    }
 
-            try {
-                $decrypted = Crypt::decryptString($value->replace($prefix, ''));
-            } catch (DecryptException $e) {
-                return $value;
-            }
-        });
+    public static function encrypt($value)
+    {
+        if (!is_string($value)) {
+            return $value;
+        }
+
+        $prefix = config('env-secure.prefix', 'scr::');
+
+        if (str_starts_with($value, $prefix)) {
+            return $value;
+        }
+
+        return $prefix . openssl_encrypt(
+                $value,
+                config("env-secure.algorithm", "AES-128-CTR"),
+                config("env-secure.key", null) ?? env('APP_KEY'),
+                0,
+                config("env-secure.iv", 1234567891011121),
+            );
+    }
+
+    public static function decrypt($value)
+    {
+        $prefix = config('env-secure.prefix', 'scr::');
+
+        if (!is_string($value)) {
+            return $value;
+        }
+
+        if (!str_starts_with($value, $prefix)) {
+            return $value;
+        }
+
+        return openssl_decrypt(
+            str_replace($prefix, '', $value),
+            config("env-secure.algorithm", "AES-128-CTR"),
+            config("env-secure.key", null) ?? env('APP_KEY'),
+            0,
+            config("env-secure.iv", 1234567891011121),
+        );
     }
 }
