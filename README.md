@@ -1,5 +1,6 @@
 # Laravel env secure
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/izica/laravel-env-secure.svg?style=flat-square)](https://packagist.org/packages/izica/laravel-env-secure)
+
 PRs are welcome
 
 ## Description
