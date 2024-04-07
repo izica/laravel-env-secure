@@ -5,7 +5,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Cache;
 
-class LaravelEnvSecure
+class EnvSecure
 {
     public static function env($key, $default = null)
     {

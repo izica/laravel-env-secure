@@ -25,7 +25,6 @@ class ComposerStaticInit5e4ed709d30e564b8bc4800a73cf6239
         ),
         'I' => 
         array (
-            'Izica\\LaravelEnvSecure\\Tests\\' => 29,
             'Izica\\LaravelEnvSecure\\' => 23,
         ),
         'G' => 
@@ -54,10 +53,6 @@ class ComposerStaticInit5e4ed709d30e564b8bc4800a73cf6239
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
-        ),
-        'Izica\\LaravelEnvSecure\\Tests\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/tests',
         ),
         'Izica\\LaravelEnvSecure\\' => 
         array (

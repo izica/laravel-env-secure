@@ -3,7 +3,7 @@
         'name' => 'izica/laravel-env-secure',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '4a5a294d06fe1885ba31441650ac7e7d5089180f',
+        'reference' => '54c134cbe9757a388bec37177387568a2e589be1',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'izica/laravel-env-secure' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '4a5a294d06fe1885ba31441650ac7e7d5089180f',
+            'reference' => '54c134cbe9757a388bec37177387568a2e589be1',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

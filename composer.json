@@ -35,10 +35,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Izica\\LaravelEnvSecure\\LaravelEnvSecureServiceProvider"
+                "Izica\\EnvSecure\\EnvSecureServiceProvider"
             ],
             "aliases": {
-                "LaravelEnvSecure": "Izica\\LaravelEnvSecure\\LaravelEnvSecureFacade"
+                "LaravelEnvSecure": "Izica\\EnvSecure\\EnvSecureFacade"
             }
         }
     }

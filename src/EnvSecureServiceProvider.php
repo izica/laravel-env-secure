@@ -3,9 +3,9 @@
 namespace Izica\EnvSecure;
 
 use Illuminate\Support\ServiceProvider;
-use Izica\EnvSecure\Commands\EnvSecure;
+use Izica\EnvSecure\Commands\EnvSecureCommand;
 
-class LaravelEnvSecureServiceProvider extends ServiceProvider
+class EnvSecureServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -21,7 +21,7 @@ class LaravelEnvSecureServiceProvider extends ServiceProvider
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         $this->commands([
-            EnvSecure::class
+            EnvSecureCommand::class
         ]);
 
         if ($this->app->runningInConsole()) {
@@ -59,7 +59,7 @@ class LaravelEnvSecureServiceProvider extends ServiceProvider
 
         // Register the main class to use with the facade
         $this->app->singleton('laravel-env-secure', function () {
-            return new LaravelEnvSecure;
+            return new EnvSecureCommand;
         });
     }
 }

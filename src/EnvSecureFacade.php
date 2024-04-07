@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @see \Izica\LaravelEnvSecure\Skeleton\SkeletonClass
  */
-class LaravelEnvSecureFacade extends Facade
+class EnvSecureFacade extends Facade
 {
     /**
      * Get the registered name of the component.

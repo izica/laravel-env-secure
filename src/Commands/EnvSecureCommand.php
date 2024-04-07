@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
-class EnvSecure extends Command
+class EnvSecureCommand extends Command
 {
     protected $signature = 'env:secure {key} {--decrypt} {--cli}';
 
