@@ -4,9 +4,6 @@ namespace Izica\EnvSecure;
 
 use Illuminate\Support\Facades\Facade;
 
-/**
- * @see \Izica\LaravelEnvSecure\Skeleton\SkeletonClass
- */
 class EnvSecureFacade extends Facade
 {
     /**

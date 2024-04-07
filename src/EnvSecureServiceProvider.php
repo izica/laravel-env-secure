@@ -12,40 +12,14 @@ class EnvSecureServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /*
-         * Optional methods to load your package assets
-         */
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'laravel-env-secure');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-env-secure');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
-
-        $this->commands([
-            EnvSecureCommand::class
-        ]);
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/env-secure.php' => config_path('env-secure.php'),
             ], 'config');
-
-            // Publishing the views.
-            /*$this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/laravel-env-secure'),
-            ], 'views');*/
-
-            // Publishing assets.
-            /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('vendor/laravel-env-secure'),
-            ], 'assets');*/
-
-            // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/laravel-env-secure'),
-            ], 'lang');*/
-
-            // Registering package commands.
-            // $this->commands([]);
+            $this->commands([
+                EnvSecureCommand::class
+            ]);
         }
     }
 
@@ -59,7 +33,7 @@ class EnvSecureServiceProvider extends ServiceProvider
 
         // Register the main class to use with the facade
         $this->app->singleton('laravel-env-secure', function () {
-            return new EnvSecureCommand;
+            return new EnvSecure();
         });
     }
 }
