@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Izica\\LaravelEnvSecure\\": "src"
+            "Izica\\EnvSecure\\": "src"
         }
     },
     "config": {
