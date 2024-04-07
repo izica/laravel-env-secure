@@ -4,6 +4,9 @@
 
 PRs are welcome
 
+## Prerequisites
+This package using `php openssl`
+
 ## Installation
 
 You can install the package via composer:
@@ -26,11 +29,22 @@ php artisan env:secure {env key} {--cli} {--decrypt}
 ```
 Options:
 * --cli - only print result in console don't rewrite .env
-* --decrypt - decript env value
+* --decrypt - decrypt env value
 
 Example:
 ```php
 php artisan env:secure DB_PASSWORD
+```
+
+*Your env file will change*
+from:
+```env
+DB_PASSWORD=somepassword
+```
+
+to:
+```env
+DB_PASSWORD=scr::zvzEOZDAE4k/7D/rx
 ```
 
 ### 2. Change config to
@@ -50,6 +64,17 @@ use \Izica\EnvSecure\EnvSecure;
         ]
     ]
 ]
+```
+
+## Config
+
+```php
+return [
+    "prefix"    => env('ENV_SECURE_PREFIX', 'scr::'),
+    "algorithm" => env('ENV_SECURE_ALGORITHM', 'AES-128-CTR'),  // https://www.php.net/manual/en/function.openssl-get-cipher-methods.php
+    "iv"        => env('ENV_SECURE_IV', 1234567891011121),
+    "key"       => env('ENV_SECURE_KEY', null), //APP_KEY by default. If you change the key after the values have been secured, you will not be able to decrypt the values in the future.
+];
 ```
 
 ## Credits
