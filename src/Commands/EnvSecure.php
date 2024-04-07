@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class EnvSecure extends Command
 {
-    protected $signature = 'env:secure {key}';
+    protected $signature = 'env:secure {key} {--decrypt} {--cli}';
 
     private function replace($key, $value1, $value2)
     {
@@ -25,6 +25,8 @@ class EnvSecure extends Command
     public function handle()
     {
         $key = $this->argument('key');
+        $decrypt = $this->option('decrypt');
+        $cli = $this->option('cli');
 
         $dotenv = Dotenv::createArrayBacked(base_path('.'));
         $data = $dotenv->load();
@@ -39,12 +41,29 @@ class EnvSecure extends Command
             return;
         }
 
-        $prefix = config("env-secure.prefix");
-        if (Str::of($value)->startsWith($prefix)) {
-            throw new \Exception("$key already secured.");
-            return;
+        $prefix = config("env-secure.prefix", "");
+
+        if ($decrypt) {
+            if (!Str::of($value)->startsWith($prefix)) {
+                throw new \Exception("$key is not secured or prefix invalid.");
+                return;
+            }
+            $newValue = Crypt::decryptString(Str::of($value)->replace($prefix, '')->toString());
+
+        } else {
+            if (Str::of($value)->startsWith($prefix)) {
+                throw new \Exception("$key already secured.");
+                return;
+            }
+            $newValue = $prefix . Crypt::encryptString($value);
         }
 
-        $this->replace($key, $value, $prefix . Crypt::encryptString($value));
+        if ($cli) {
+            print_r("\n");
+            print_r($newValue);
+            print_r("\n");
+        } else {
+            $this->replace($key, $value, $newValue);
+        }
     }
 }
