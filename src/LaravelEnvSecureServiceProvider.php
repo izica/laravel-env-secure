@@ -22,7 +22,8 @@ class LaravelEnvSecureServiceProvider extends ServiceProvider
 
         $this->commands([
             EnvSecure::class
-        ])
+        ]);
+        
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/env-secure.php' => config_path('env-secure.php'),
