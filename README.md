@@ -7,7 +7,7 @@ PRs are welcome
 Simple Laravel package with zero dependencies for securing your env values, such as database passwords or API keys, to prevent exposure($_ENV or $_SERVER) due to mistakes
 
 ## Prerequisites
-This package using `php openssl`
+This package using https://www.php.net/manual/en/ref.openssl.php
 
 ## Installation
 
