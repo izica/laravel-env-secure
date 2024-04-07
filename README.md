@@ -1,6 +1,9 @@
+#Laravel env secure
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/izica/laravel-env-secure.svg?style=flat-square)](https://packagist.org/packages/izica/laravel-env-secure)
-
 PRs are welcome
+
+## Description
+Simple Laravel package with zero dependencies for securing your env values, such as database passwords or API keys, to prevent exposure due to mistakes
 
 ## Prerequisites
 This package using `php openssl`
