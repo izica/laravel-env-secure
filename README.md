@@ -1,10 +1,11 @@
 # Very short description of the package
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/izica/laravel-env-secure.svg?style=flat-square)](https://packagist.org/packages/izica/laravel-env-secure)
-[![Total Downloads](https://img.shields.io/packagist/dt/izica/laravel-env-secure.svg?style=flat-square)](https://packagist.org/packages/izica/laravel-env-secure)
-![GitHub Actions](https://github.com/izica/laravel-env-secure/actions/workflows/main.yml/badge.svg)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+PRs are welcome
+
+## Prerequisites
+This package using `php openssl`
 
 ## Installation
 
@@ -18,7 +19,6 @@ composer require izica/laravel-env-secure
 
 ```bash
 php artisan vendor:publish --provider="Izica\\EnvSecure\\EnvSecureServiceProvider"
-
 ```
 
 ## Usage
@@ -29,11 +29,22 @@ php artisan env:secure {env key} {--cli} {--decrypt}
 ```
 Options:
 * --cli - only print result in console don't rewrite .env
-* --decrypt - decript env value
+* --decrypt - decrypt env value
 
 Example:
 ```php
 php artisan env:secure DB_PASSWORD
+```
+
+*Your env file will change*
+from:
+```env
+DB_PASSWORD=somepassword
+```
+
+to:
+```env
+DB_PASSWORD=scr::zvzEOZDAE4k/7D/rx
 ```
 
 ### 2. Change config to
@@ -55,24 +66,16 @@ use \Izica\EnvSecure\EnvSecure;
 ]
 ```
 
+## Config
 
-### Testing
-
-```bash
-composer test
+```php
+return [
+    "prefix"    => env('ENV_SECURE_PREFIX', 'scr::'),
+    "algorithm" => env('ENV_SECURE_ALGORITHM', 'AES-128-CTR'),  // https://www.php.net/manual/en/function.openssl-get-cipher-methods.php
+    "iv"        => env('ENV_SECURE_IV', 1234567891011121),
+    "key"       => env('ENV_SECURE_KEY', null), //APP_KEY by default. If you change the key after the values have been secured, you will not be able to decrypt the values in the future.
+];
 ```
-
-### Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-### Security
-
-If you discover any security related issues, please email artemiztomska@gmail.com instead of using the issue tracker.
 
 ## Credits
 
@@ -82,7 +85,3 @@ If you discover any security related issues, please email artemiztomska@gmail.co
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-## Laravel Package Boilerplate
-
-This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).
