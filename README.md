@@ -1,11 +1,13 @@
-# Very short description of the package
-
+# Laravel env secure
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/izica/laravel-env-secure.svg?style=flat-square)](https://packagist.org/packages/izica/laravel-env-secure)
 
 PRs are welcome
 
+## Description
+Simple Laravel package with zero dependencies for securing your env values, such as database passwords or API keys, to prevent exposure($_ENV or $_SERVER) due to mistakes
+
 ## Prerequisites
-This package using `php openssl`
+This package using https://www.php.net/manual/en/ref.openssl.php
 
 ## Installation
 
@@ -23,7 +25,7 @@ php artisan vendor:publish --provider="Izica\\EnvSecure\\EnvSecureServiceProvide
 
 ## Usage
 
-### 1. Encrypt env value
+#### 1. Encrypt env value
 ```php
 php artisan env:secure {env key} {--cli} {--decrypt}
 ```
@@ -47,7 +49,7 @@ to:
 DB_PASSWORD=scr::zvzEOZDAE4k/7D/rx
 ```
 
-### 2. Change config to
+#### 2. Change config to
 
 ```php
 //config/database.php
@@ -69,11 +71,23 @@ use \Izica\EnvSecure\EnvSecure;
 ## Config
 
 ```php
+//config env-secure.php
 return [
     "prefix"    => env('ENV_SECURE_PREFIX', 'scr::'),
     "algorithm" => env('ENV_SECURE_ALGORITHM', 'AES-128-CTR'),  // https://www.php.net/manual/en/function.openssl-get-cipher-methods.php
     "iv"        => env('ENV_SECURE_IV', 1234567891011121),
     "key"       => env('ENV_SECURE_KEY', null), //APP_KEY by default. If you change the key after the values have been secured, you will not be able to decrypt the values in the future.
+];
+```
+
+#### Security recommendations
+Set the key directly in the file, like: 
+
+```php
+//config env-secure.php
+return [
+   //...
+    "key" => "kovdj43ksadjl32jlk"
 ];
 ```
 
